@@ -50,3 +50,7 @@ reports:
     files: #Store all of the files
       - '**/*'
     base-directory: '02postman/newman' # Location of the reports
+  PostDeploymentReport:
+    files: #Store all of the files
+      - '**/*'
+    base-directory: '02_1postman/newman' # Location of the reports
