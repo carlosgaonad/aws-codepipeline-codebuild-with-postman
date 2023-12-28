@@ -18,9 +18,11 @@ phases:
       - aws s3 cp "s3://${S3_BUCKET}/postman-env-files/PetStoreAPI.postman_collection.json" ./02postman/
       - cd ./02postman
       - ./update-postman-env-file.sh
+      - cp update-postman-env-file.sh ./02_1postman/
       - aws s3 cp "s3://${S3_BUCKET}/postman-env-files/PetStoreAPIEnvironment.postman_environment.json" ./02_1postman/
       - aws s3 cp "s3://${S3_BUCKET}/postman-env-files/PetStoreAPI.postman_collection.json" ./02_1postman/
       - cd ./02_1postman/
+      - ls -lrt
       - ./update-postman-env-file.sh
 
   build:
