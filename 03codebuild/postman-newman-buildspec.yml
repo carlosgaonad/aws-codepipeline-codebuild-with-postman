@@ -18,13 +18,23 @@ phases:
       - aws s3 cp "s3://${S3_BUCKET}/postman-env-files/PetStoreAPI.postman_collection.json" ./02postman/
       - cd ./02postman
       - ./update-postman-env-file.sh
+      - s3 cp "s3://${S3_BUCKET}/postman-env-files/PetStoreAPIEnvironment.postman_environment.json" ./02_1postman/
+      - aws s3 cp "s3://${S3_BUCKET}/postman-env-files/PetStoreAPI.postman_collection.json" ./02_1postman/
+      - cd ./02_1postman/
+      - ./update-postman-env-file.sh
 
   build:
     commands:
       - echo Build started on `date` from dir `pwd`
       - newman run PetStoreAPI.postman_collection.json --environment PetStoreAPIEnvironment.postman_environment.json -r junit
       - ls -lrt
-      - echo Checking newman response **********
+      - echo Checking newman response
+      - ls -lrt newman/
+      - cd ./02postman
+      - echo Build started on `date` from dir `pwd`
+      - newman run PetStoreAPI.postman_collection.json --environment PetStoreAPIEnvironment.postman_environment.json -r junit
+      - ls -lrt
+      - echo Checking newman response
       - ls -lrt newman/
 
 reports:
