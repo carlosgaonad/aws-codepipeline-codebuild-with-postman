@@ -33,6 +33,7 @@ phases:
       - echo Build started on `date` from dir `pwd`
       - cd ..
       - pwd
+      - mkdir newman
       - mkdir newman/02postman
       - cd ./02postman
       - newman run PetStoreAPI.postman_collection.json --environment PetStoreAPIEnvironment.postman_environment.json -r junit --reporter-junit-export ../newman/02postman
