@@ -41,7 +41,7 @@ phases:
       - cd ..
       - pwd
       - ls -lrt
-      - cd ../02_1postman
+      - cd 02_1postman
       - echo Build started on `date` from dir `pwd`
       - newman run PetStoreAPI.postman_collection.json --environment PetStoreAPIEnvironment.postman_environment.json -r junit --reporter-junit-export ../newman/02_1postman
       - cd .. 
