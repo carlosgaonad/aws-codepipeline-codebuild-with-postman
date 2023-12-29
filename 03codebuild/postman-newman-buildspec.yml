@@ -38,10 +38,10 @@ phases:
       - cd ./02postman
       - newman run PetStoreAPI.postman_collection.json --environment PetStoreAPIEnvironment.postman_environment.json -r junit --reporter-junit-export ../newman/02postman
       - cd ../ 
-      - newman/02_1postman
+      - mkdir newman/02_1postman
       - cd ../02_1postman
       - echo Build started on `date` from dir `pwd`
-      - newman run PetStoreAPI.postman_collection.json --environment PetStoreAPIEnvironment.postman_environment.json -r junit
+      - newman run PetStoreAPI.postman_collection.json --environment PetStoreAPIEnvironment.postman_environment.json -r junit --reporter-junit-export ../newman/02_1postman
       - cd .. 
       - cp ./02postman/create-report-groups.sh .
       - chmod 764 create-report-groups.sh
