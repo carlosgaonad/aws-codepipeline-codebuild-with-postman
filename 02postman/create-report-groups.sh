@@ -9,5 +9,7 @@ for d in ./*/ ; do
     for entry in "$d"/*
     do
         echo "File $entry on $d"
+        SUBSTRING=$(echo $entry| cut -d'/' -f 4)
+        echo "XML File : $SUBSTRING "
     done
 done
