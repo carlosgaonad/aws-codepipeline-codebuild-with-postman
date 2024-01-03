@@ -46,6 +46,7 @@ phases:
       - newman run PetStoreAPI.postman_collection.json --environment PetStoreAPIEnvironment.postman_environment.json -r junit --reporter-junit-export ../newman/02_1postman
       - cd .. 
       - cp ./02postman/create-report-groups.sh .
+      - cp ./02postman/reportGroupConf.json .
       - chmod 764 create-report-groups.sh
       - ./create-report-groups.sh
 
