@@ -10,6 +10,7 @@ for d in ./*/ ; do
     do
         echo "File $entry on $d"
         REPORT_NAME=$(echo $d| rev |cut -d'/' -f 1)
+        echo " ******** $REPORT_NAME  ****"
         # ./02postman//newman-run-report-2024-01-02-21-57-59-022-0.xml
         # revert newman-run-report-2024-01-02-21-57-59-022-0.xml//02postman/.
         FILE_REPORT=$(echo $entry| rev |cut -d'/' -f 1)
