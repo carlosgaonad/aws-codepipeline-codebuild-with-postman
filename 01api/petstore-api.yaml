@@ -5,6 +5,8 @@ Resources:
     Type: AWS::Serverless::Api
     Properties:
       StageName: prod
+      Auth:
+        DefaultAuthorizer: AWS_IAM
       DefinitionUri: petstore-swagger.json
     
 Outputs:
