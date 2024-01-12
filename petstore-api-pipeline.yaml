@@ -142,6 +142,11 @@ Resources:
             - "iam:PassRole"
             Resource:
             - "*"
+          - Effect: "Allow"
+            Action:
+              - "sts:*"
+            Resource:
+              - "*"
 
   CloudFormationTrustRole:
     Type: 'AWS::IAM::Role'

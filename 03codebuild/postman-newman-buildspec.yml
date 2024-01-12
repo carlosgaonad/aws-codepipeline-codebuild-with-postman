@@ -26,16 +26,20 @@ phases:
       - cd ./02_1postman/
       - ls -lrt
       - ./update-postman-env-file.sh
+      
 
 
   build:
     commands:
       - echo Build started on `date` from dir `pwd`
-      - aws codebuild list-source-credentials
-      - ACCESS_KEY=$(cat ~/.aws/credentials |grep aws_access_key_id | cut -d"=" -f 2)
-      - SECRET_ACCESS_KEY=$(cat ~/.aws/credentials |grep aws_secret_access_key | cut -d"=" -f 2)
-      - echo Llave de acceso $ACCESS_KEY
-      - echo $SECRET_ACCESS_KEY
+      - ASSUME_ROLE_ARN="arn:aws:sts::591395389390:assumed-role/petstore-api-pipeline-CodeBuildServiceRole"
+      - TEMP_ROLE=$(aws sts assume-role --role-arn $ASSUME_ROLE_ARN --role-session-name test)
+      - export TEMP_ROLE
+      - export AWS_ACCESS_KEY_ID=$(echo "${TEMP_ROLE}" | jq -r '.Credentials.AccessKeyId')
+      - export AWS_SECRET_ACCESS_KEY=$(echo "${TEMP_ROLE}" | jq -r '.Credentials.SecretAccessKey')
+      - export AWS_SESSION_TOKEN=$(echo "${TEMP_ROLE}" | jq -r '.Credentials.SessionToken')
+      - echo $AWS_ACCESS_KEY_ID
+      - echo $AWS_SECRET_ACCESS_KEY
       - cd ..
       - pwd
       - mkdir newman
