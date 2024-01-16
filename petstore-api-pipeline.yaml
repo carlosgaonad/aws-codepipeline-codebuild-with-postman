@@ -129,7 +129,7 @@ Resources:
             Action:
             - "execute-api:*"
             Resource:
-            - Fn::Sub: arn:aws:execute-api:*:$account:*/*/*/*
+            - Fn::Sub: arn:aws:execute-api:*:${AWS::AccountId}:*/*/*/*
           -
             Effect: "Allow"
             Action:
