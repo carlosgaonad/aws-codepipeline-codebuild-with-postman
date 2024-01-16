@@ -127,6 +127,12 @@ Resources:
           -
             Effect: "Allow"
             Action:
+            - "execute-api:*"
+            Resource:
+            - Fn::Sub: arn:aws:execute-api:*:$account:*/*/*/*
+          -
+            Effect: "Allow"
+            Action:
             - "s3:PutObject"
             - "s3:GetObject"
             - "s3:GetObjectVersion"
