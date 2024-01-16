@@ -16,6 +16,11 @@ jq -e --arg apigwurl "$api_gateway_url" '(.values[] | select(.key=="apigw-root")
   && cp PetStoreAPIEnvironment.postman_environment.json.tmp PetStoreAPIEnvironment.postman_environment.json \
   && rm PetStoreAPIEnvironment.postman_environment.json.tmp
 
+jq -e --arg AWS_ACCESS_KEY "$AWS_ACCESS_KEY" '(.values[] | select(.key=="AWS_ACCESS_KEY") | .value) = $AWS_ACCESS_KEY' \
+  PetStoreAPIEnvironment.postman_environment.json > PetStoreAPIEnvironment.postman_environment.json.tmp \
+  && cp PetStoreAPIEnvironment.postman_environment.json.tmp PetStoreAPIEnvironment.postman_environment.json \
+  && rm PetStoreAPIEnvironment.postman_environment.json.tmp
+
 echo "Updated PetStoreAPIEnvironment.postman_environment.json"
 
 cat PetStoreAPIEnvironment.postman_environment.json
