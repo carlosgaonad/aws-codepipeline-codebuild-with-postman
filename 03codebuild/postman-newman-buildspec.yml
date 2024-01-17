@@ -44,13 +44,13 @@ phases:
       - mkdir newman/02postman
       - mkdir newman/02_1postman
       - cd ./02postman
-      - newman run PetStoreAPI.postman_collection.json --environment PetStoreAPIEnvironment.postman_environment.json -r junit --reporter-junit-export ../newman/02postman
+      - newman run PetStoreAPI.postman_collection.json --environment PetStoreAPIEnvironment.postman_environment.json -r junit
       - cd ..
       - pwd
       - ls -lrt
       - cd 02_1postman
       - echo Build started on `date` from dir `pwd`
-      - newman run PetStoreAPI.postman_collection.json --environment PetStoreAPIEnvironment.postman_environment.json -r junit --reporter-junit-export ../newman/02_1postman
+      - newman run PetStoreAPI.postman_collection.json --environment PetStoreAPIEnvironment.postman_environment.json -r junit
       - cd .. 
       - cp ./02postman/create-report-groups.sh .
       - cp ./02postman/reportGroupConf.json .
