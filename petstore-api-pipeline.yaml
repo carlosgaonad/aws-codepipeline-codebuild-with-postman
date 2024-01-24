@@ -243,6 +243,17 @@ Resources:
             Type: PLAINTEXT
             Value:
               Fn::Sub: ${BucketRoot}
+          - Name: ENVIRONMENT
+            Type: PLAINTEXT
+            Value: "qa"
+          - Name: TEST_TYPE
+            Type: PLAINTEXT
+            Value: 
+              Fn::Sub: ${TestType}
+          - Name: REPO_COLECTIONS
+            Type: PLAINTEXT
+            Value: 
+              Fn::Sub: ${RepoCollections}
       Source:
         Location: !Join
           - ''

@@ -3,6 +3,9 @@ version: 0.2
 env:
   variables:
     key: "S3_BUCKET"
+    environment: "ENVIRONMENT"
+    test_type: "TEST_TYPE"
+    repo_colllections : "REPO_COLECTIONS"
 
 phases:
   install:
@@ -14,6 +17,11 @@ phases:
 
   pre_build:
     commands:
+      - git clone codecommit::us-east-1://${REPO_COLECTIONS}
+      - cd ${REPO_COLECTIONS}
+      - ls -lrt *
+      - cd ..
+      - ls -lrt ${REPO_COLECTIONS}/${TEST_TYPE}/*
       - CREDENTIALS_URL="http://169.254.170.2$AWS_CONTAINER_CREDENTIALS_RELATIVE_URI"
       - echo $AWS_CONTAINER_CREDENTIALS_RELATIVE_URI
       - AWS_ACCESS_KEY_ID=$(curl -s $CREDENTIALS_URL | jq -r '.AccessKeyId')
