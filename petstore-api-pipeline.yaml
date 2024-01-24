@@ -21,6 +21,17 @@ Parameters:
     Description: bucket containing project artifacts e.g. postman config files, etc.
     MinLength: 1
     MaxLength: 100
+  RepoCollections:
+    Type: String
+    Description: repository where all collections are stored.
+    MinLength: 1
+    MaxLength: 100
+  TestType:
+    Type: String
+    Description: repository where all collections are stored.
+    MinLength: 1
+    MaxLength: 100
+
 
 Resources:
 
