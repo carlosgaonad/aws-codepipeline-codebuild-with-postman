@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    api-test: "cbap-dev-api-current-account"
+    apitest: "cbap-dev-api-current-account"
   exported-variables:
     - ENVIRONMENT
     - TEST_TYPE
@@ -24,7 +24,7 @@ phases:
       - cd ${REPO_COLECTIONS}
       - ls -lrt *
       - cd ..
-      - ls -lrt ${REPO_COLECTIONS}/${TEST_TYPE}/${api-test}/${ENVIRONMENT}/*
+      - ls -lrt ${REPO_COLECTIONS}/${TEST_TYPE}/${apitest}/${ENVIRONMENT}/*
       - CREDENTIALS_URL="http://169.254.170.2$AWS_CONTAINER_CREDENTIALS_RELATIVE_URI"
       - echo $AWS_CONTAINER_CREDENTIALS_RELATIVE_URI
       - AWS_ACCESS_KEY_ID=$(curl -s $CREDENTIALS_URL | jq -r '.AccessKeyId')
