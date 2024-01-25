@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    key: "S3_BUCKET"
+    api-test: "cbap-dev-api-current-account"
   exported-variables:
     - ENVIRONMENT
     - TEST_TYPE
@@ -15,16 +15,16 @@ phases:
     commands: #https://learning.getpostman.com/docs/postman/collection-runs/command-line-integration-with-newman/
       - npm install -g newman
       - yum install -y jq
-      - pip3 install awscli --upgrade --user
+      #- pip3 install awscli --upgrade --user
       - pip install git-remote-codecommit
 
   pre_build:
     commands:
       - git clone codecommit::us-east-1://${REPO_COLECTIONS}
-      - cd dig-dev-poc-postman-collections
+      - cd ${REPO_COLECTIONS}
       - ls -lrt *
       - cd ..
-      - ls -lrt dig-dev-poc-postman-collections/smoke_test/*
+      - ls -lrt ${REPO_COLECTIONS}/${TEST_TYPE}/${api-test}/${ENVIRONMENT}/*
       - CREDENTIALS_URL="http://169.254.170.2$AWS_CONTAINER_CREDENTIALS_RELATIVE_URI"
       - echo $AWS_CONTAINER_CREDENTIALS_RELATIVE_URI
       - AWS_ACCESS_KEY_ID=$(curl -s $CREDENTIALS_URL | jq -r '.AccessKeyId')
