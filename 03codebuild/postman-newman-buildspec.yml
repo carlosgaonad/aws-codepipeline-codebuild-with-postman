@@ -18,11 +18,11 @@ phases:
 
   pre_build:
     commands:
-      - git clone codecommit::us-east-1://${REPO_COLECTIONS}
-      - cd ${REPO_COLECTIONS}
+      - git clone codecommit::us-east-1://dig-dev-poc-postman-collections
+      - cd dig-dev-poc-postman-collections
       - ls -lrt *
       - cd ..
-      - ls -lrt ${REPO_COLECTIONS}/${TEST_TYPE}/*
+      - ls -lrt dig-dev-poc-postman-collections/smoke_test/*
       - CREDENTIALS_URL="http://169.254.170.2$AWS_CONTAINER_CREDENTIALS_RELATIVE_URI"
       - echo $AWS_CONTAINER_CREDENTIALS_RELATIVE_URI
       - AWS_ACCESS_KEY_ID=$(curl -s $CREDENTIALS_URL | jq -r '.AccessKeyId')
