@@ -3,9 +3,10 @@ version: 0.2
 env:
   variables:
     key: "S3_BUCKET"
-    environment: "ENVIRONMENT"
-    test_type: "TEST_TYPE"
-    repo_colllections : "REPO_COLECTIONS"
+  exported-variables:
+    - ENVIRONMENT
+    - TEST_TYPE
+    - REPO_COLECTIONS
 
 phases:
   install:
