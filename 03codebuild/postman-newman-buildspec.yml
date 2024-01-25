@@ -15,10 +15,12 @@ phases:
     commands: #https://learning.getpostman.com/docs/postman/collection-runs/command-line-integration-with-newman/
       - npm install -g newman
       - yum install -y jq
+      - pip3 install awscli --upgrade --user
+      - pip install git-remote-codecommit
 
   pre_build:
     commands:
-      - git clone codecommit::us-east-1://dig-dev-poc-postman-collections
+      - git clone codecommit::us-east-1://${REPO_COLECTIONS}
       - cd dig-dev-poc-postman-collections
       - ls -lrt *
       - cd ..
