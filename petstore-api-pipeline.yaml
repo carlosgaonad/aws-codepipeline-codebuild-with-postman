@@ -127,6 +127,11 @@ Resources:
               - "cloudformation:DescribeStacks"
             Resource:
               - "*"
+          - Effect: "Allow"
+            Action:
+              - "codecommit:*"
+            Resource:
+              - "*"
           -
             Effect: "Allow"
             Action:
