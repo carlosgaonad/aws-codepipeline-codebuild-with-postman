@@ -20,7 +20,7 @@ def main():
         
         path = args[0]+"/"+args[1]+"/"+args[2]+"/"+args[3]+"/"+lambdatid+"/"+lambdatag
         isExist = os.path.exists(path)
-        print("URL : "+ args[0]+"/"+args[1]+"/"+args[2]+"/"+args[3]+"/"+lambdatid+"/"+lambdatag + "   Exist="+isExist)
+        print("URL : "+ args[0]+"/"+args[1]+"/"+args[2]+"/"+args[3]+"/"+lambdatid+"/"+lambdatag + "   Exist="+str(isExist))
 
 if __name__ == "__main__":
     main()
