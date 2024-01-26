@@ -53,6 +53,7 @@ phases:
       - cd ..
       - pwd
       - mkdir newman
+      - mkdir newman/${apitest}
       - python run-newman-test.py ${REPO_COLECTIONS} ${TEST_TYPE} ${apitest} ${ENVIRONMENT}
       - ls -lrt newman/
       - mkdir newman/02postman

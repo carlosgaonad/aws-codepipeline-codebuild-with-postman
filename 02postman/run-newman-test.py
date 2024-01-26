@@ -26,7 +26,8 @@ def main():
         
         if isExist :
             #Crear directorio newman/servicio
-            tempnewmanurl = "newman/"+args[2]+"/"+lambdatid+"/"+lambdatag
+            #tempnewmanurl = "newman/"+args[2]+"/"+lambdatid+"/"+lambdatag
+            tempnewmanurl = "newman/"+args[2]+"/"+lambdatid
             subprocess.run(["mkdir", tempnewmanurl])
             #command = "newman run postman_collection.json --environment postman_environment.json -r junit --reporter-junit-export " + tempnewmanurl
             #process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
