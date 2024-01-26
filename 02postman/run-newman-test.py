@@ -38,8 +38,11 @@ def main():
 
             command = "newman run "+ pathCollection +" --environment "+pathEnvironment+" -r junit --reporter-junit-export " + tempnewmanurl
             print("Ready to run command = "+ command)
-            process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
-            process.wait()
+            subprocess.run(["newman", "run",pathCollection, "--environment", pathEnvironment , "-r", "junit", "--reporter-junit-export", tempnewmanurl ],
+                           shell=True, capture_output=True)
+            
+            #process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+            #process.wait()
         else:
             print("Directory or files not fount in "+pathDir+ ", please check your repository")
 
