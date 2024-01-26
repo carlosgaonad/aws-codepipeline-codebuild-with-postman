@@ -52,8 +52,9 @@ phases:
       - echo Build started on `date` from dir `pwd`
       - cd ..
       - pwd
-      - python run-newman-test.py ${REPO_COLECTIONS} ${TEST_TYPE} ${apitest} ${ENVIRONMENT}
       - mkdir newman
+      - python run-newman-test.py ${REPO_COLECTIONS} ${TEST_TYPE} ${apitest} ${ENVIRONMENT}
+      - ls -lrt newman/
       - mkdir newman/02postman
       - mkdir newman/02_1postman
       - cd ./02postman
