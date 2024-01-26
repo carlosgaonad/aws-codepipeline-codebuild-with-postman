@@ -21,11 +21,13 @@ def main():
         lambdatid = indexval['lambda']['image']['id']
         lambdatag = indexval['lambda']['image']['tag']
         
-        path = args[0]+"/"+args[1]+"/"+args[2]+"/"+args[3]+"/"+lambdatid+"/"+lambdatag
+        pathDir = args[0]+"/"+args[1]+"/"+args[2]+"/"+args[3]+"/"+lambdatid+"/"+lambdatag
+        pathCollection = pathDir+"/postman_collection.json"
+        pathEnvironment = pathDir+"/postman_environment.json"
         #Check if exist the repository path with the correct files
-        isExist = os.path.exists(path)
-        isExistcollection=os.path.exists(path+"/postman_collection.json")
-        isExistEnvironment=os.path.exists(path+"/postman_environment.json")
+        isExist = os.path.exists(pathDir)
+        isExistcollection=os.path.exists(pathCollection)
+        isExistEnvironment=os.path.exists(pathEnvironment)
         #print("URL : "+ args[0]+"/"+args[1]+"/"+args[2]+"/"+args[3]+"/"+lambdatid+"/"+lambdatag + "   Exist="+str(isExist))
         
         if isExist & isExistcollection & isExistEnvironment:
@@ -33,11 +35,11 @@ def main():
             #tempnewmanurl = "newman/"+args[2]+"/"+lambdatid+"/"+lambdatag
             tempnewmanurl = "newman/"+args[2]+"/"+lambdatid
             subprocess.run(["mkdir", tempnewmanurl])
-            #command = "newman run postman_collection.json --environment postman_environment.json -r junit --reporter-junit-export " + tempnewmanurl
-            #process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
-            #process.wait()
+            command = "newman run "+ isExistcollection +" --environment "+isExistEnvironment+" -r junit --reporter-junit-export " + tempnewmanurl
+            process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+            process.wait()
         else:
-            print("Directory or files not fount in "+path+ ", please check your repository")
+            print("Directory or files not fount in "+pathDir+ ", please check your repository")
 
 
 if __name__ == "__main__":
