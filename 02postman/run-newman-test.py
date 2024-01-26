@@ -35,7 +35,9 @@ def main():
             #tempnewmanurl = "newman/"+args[2]+"/"+lambdatid+"/"+lambdatag
             tempnewmanurl = "newman/"+args[2]+"/"+lambdatid
             subprocess.run(["mkdir", tempnewmanurl])
-            command = "newman run "+ isExistcollection +" --environment "+isExistEnvironment+" -r junit --reporter-junit-export " + tempnewmanurl
+
+            command = "newman run "+ pathCollection +" --environment "+pathEnvironment+" -r junit --reporter-junit-export " + tempnewmanurl
+            print("Ready to run command = "+ command)
             process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
             process.wait()
         else:
