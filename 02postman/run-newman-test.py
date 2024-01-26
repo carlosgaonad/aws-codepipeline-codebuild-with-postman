@@ -1,3 +1,4 @@
+import os
 import sys
 import json
 
@@ -16,7 +17,10 @@ def main():
         #print(indexval['lambda']['image'])
         lambdatid = indexval['lambda']['image']['id']
         lambdatag = indexval['lambda']['image']['tag']
-        print("URL : "+ args[0]+"/"+args[1]+"/"+args[2]+"/"+args[3]+"/"+lambdatid+"/"+lambdatag)
+        
+        path = args[0]+"/"+args[1]+"/"+args[2]+"/"+args[3]+"/"+lambdatid+"/"+lambdatag
+        isExist = os.path.exists(path)
+        print("URL : "+ args[0]+"/"+args[1]+"/"+args[2]+"/"+args[3]+"/"+lambdatid+"/"+lambdatag + "   Exist="+isExist)
 
 if __name__ == "__main__":
     main()
