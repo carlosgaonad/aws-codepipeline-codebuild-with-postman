@@ -1,0 +1,1788 @@
+{
+  "app": "npx ts-node bin/api.ts",
+  "context": {
+    "@aws-cdk/core:enableStackNameDuplicates": "true",
+    "aws-cdk:enableDiffNoFail": "true",
+    "cbap-cdk:disableEcrDeployment": false,
+    "OrganizationalTags": {
+      "applicationCode": "CBAP",
+      "applicationName": "Core Banking API",
+      "applicationModule": "API",
+      "applicationModuleCode": "API",
+      "group": "Core Banking",
+      "approver": "myra.ruiz@evertecinc.com",
+      "requestor": "jabnia.rodriguez@evertecinc.com",
+      "ownerName": "samuel.hidalgonieves@evertecinc.com",
+      "businessUnit": "Digital Solutions",
+      "costCenter": "78679",
+      "env": "DEV"
+    },
+    "Service": {
+      "id": "CurrentAccount",
+      "apiGateway": {
+        "endpointType": "PRIVATE",
+        "vcpNameSuffix": "Networking/API/Vpc",
+        "environments": [
+          {
+            "type": "DEV",
+            "vpcEndpointIds": [
+              "vpce-0941a762fe8475cb3"
+            ],
+            "usagePlans": [
+              {
+                "clientCode": "EVT",
+                "apiKeys": [
+                  "93zl98atv7"
+                ]
+              },
+              {
+                "clientCode": "VTS",
+                "apiKeys": [
+                  "mxplebr8jc"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "QA",
+            "vpcEndpointIds": [
+              "vpce-05ddd4331b92691a7"
+            ],
+            "usagePlans": [
+              {
+                "clientCode": "EVT",
+                "apiKeys": [
+                  "s6r8kwc7e1"
+                ]
+              },
+              {
+                "clientCode": "VTS",
+                "apiKeys": [
+                  "9a7443tw1c"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "TST",
+            "vpcEndpointIds": [
+              "vpce-038cf26d827c5cb86",
+              "vpce-02f5682aa727c2c79"
+            ],
+            "authorizedPrincipals": [
+              "arn:aws:iam::974839011307:role/PopularTestRoleForLambda",
+              "arn:aws:iam::766187213257:role/BPAC-DEV-core-banking-api-role-CoreBanKAPIMRole-CUGH1YOH0ET9",
+              "arn:aws:iam::833469488738:role/BPAC-CRT-core-banking-api-role-CoreBanKAPIMRole-1WIG9EWAV70P1",
+              "arn:aws:iam::217639699055:role/BPAC-PRP-core-banking-api-role-CoreBanKAPIMRole-1X65SAOOPP2Q2"
+            ],
+            "usagePlans": [
+              {
+                "clientCode": "EVT",
+                "apiKeys": [
+                  "d86sn20q2k"
+                ]
+              },
+              {
+                "clientCode": "POP",
+                "apiKeys": [
+                  "i6v20etfdb"
+                ]
+              },
+              {
+                "clientCode": "BPAC",
+                "apiKeys": [
+                  "m79i3i5xu2"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "CRT",
+            "vpcEndpointIds": [
+              "vpce-038cf26d827c5cb86",
+              "vpce-041e60c5138816937"
+            ],
+            "usagePlans": [
+              {
+                "clientCode": "EVT",
+                "apiKeys": [
+                  "2ib8ea3yx3"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "PRD",
+            "vpcEndpointIds": [
+              "vpce-0693581c63a45da26"
+            ],
+            "authorizedPrincipals": [
+              "arn:aws:iam::269763020244:role/BPAC-PRD-core-banking-api-role-CoreBanKAPIMRole-11S6DIOUOAKO"
+            ],
+            "usagePlans": [
+              {
+                "clientCode": "EVT",
+                "apiKeys": [
+                  "jsf3m6rwyd"
+                ]
+              },
+              {
+                "clientCode": "POP",
+                "apiKeys": [
+                  "unx3axmeyg"
+                ]
+              },
+              {
+                "clientCode": "BPAC",
+                "apiKeys": [
+                  "js660ckd0b"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "resources": [
+	  {
+          "id": "CurrentAccountPaymentsXferDelControl",
+          "path": "{current-account-id}/payments/xfersetup/control",
+          "method": "DELETE",
+          "lambda": {
+            "image": {
+              "id": "currentaccount-payments-xfersetup-control",
+              "tag": "1.1.0-656f8537"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/TVCustXferDel/test"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/TVCustXferDel/test"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/TVCustXferDel"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/TVCustXferDel/test"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/TVCustXferDel/prod"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "PaymentsStopCheckReverse",
+          "path": "{current-account-id}/payments/stopcheck/control",
+          "method": "DELETE",
+          "lambda": {
+            "image": {
+              "id": "currentaccount-payments-stopcheckreverse",
+              "tag": "1.1.0-655b1691"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "MIBANCO_SOAP_URL": "http://64.178.214.155:9996/TVStopCheckRev/test",
+                  "EBSS_SOAP_URL": "http://64.178.214.155:9996/IdaStopPmtMaint/V2"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "MIBANCO_SOAP_URL": "http://64.178.214.155:9996/TVStopCheckRev/test",
+                  "EBSS_SOAP_URL": "http://64.178.214.155:9996/IdaStopPmtMaint/V2"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "MIBANCO_SOAP_URL": "http://64.178.214.157:9996/TVStopCheckRev",
+                  "EBSS_SOAP_URL": "http://64.178.214.157:9996/IdaStopPmtMaint/V2"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "MIBANCO_SOAP_URL": "http://64.178.214.155:9996/TVStopCheckRev/test",
+                  "EBSS_SOAP_URL": "http://64.178.214.155:9996/IdaStopPmtMaint/V2"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "MIBANCO_SOAP_URL": "https://api.dpint.evertecinc.com:9996/TVStopCheckRev/prod",
+                  "EBSS_SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaStopPmtMaint/V2"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "Statements",
+          "path": "{current-account-id}/statements/retrieve",
+          "method": "GET",
+          "lambda": {
+            "image": { 
+              "id": "currentaccount-statements",
+              "tag": "1.1.0-653f1461"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/TVDepositStatementInquiry/test"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/TVDepositStatementInquiry/test"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/TVDepositStatementInquiry"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/TVDepositStatementInquiry/test"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/TVDepositStatementInquiry/prod"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "Payments",
+          "path": "{current-account-id}/payments/stopcheck/retrieve",
+          "method": "GET",
+          "lambda": {
+            "image": {
+              "id": "currentaccount-payments",
+              "tag": "1.1.2-6557c17ce"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:9996/IdaStopPmtMaint/V2"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:9996/IdaStopPmtMaint/V2"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:9996/IdaStopPmtMaint/V2"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:9996/IdaStopPmtMaint/V2"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaStopPmtMaint/V2"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "IssuedDevice",
+          "path": "{current-account-id}/issueddevice/retrieve",
+          "method": "GET",
+          "lambda": {
+            "image": {
+              "id": "currentaccount-issueddevice",
+              "tag": "1.1.0-655b12cc"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/TVAccountInquiry/v2/test"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/TVAccountInquiry/v2/test"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/TVAccountInquiry/v2"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/TVAccountInquiry/v2/test"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/TVAccountInquiry/v2/prod"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "CurrentAccount",
+          "path": "{current-account-id}/retrieve",
+          "method": "GET",
+          "lambda": {
+            "image": {
+              "id": "currentaccount",
+              "tag": "1.1.0-653f4227"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/TVAccountInquiry/v2/test"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/TVAccountInquiry/v2/test"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/TVAccountInquiry/v2"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/TVAccountInquiry/v2/test"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/TVAccountInquiry/v2/prod"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "Transactions",
+          "path": "{current-account-id}/transactions/retrieve",
+          "method": "GET",
+          "lambda": {
+            "image": {
+              "id": "currentaccount-transactions",
+              "tag": "1.1.0-654d15e4"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/TVDepositAccountTransactionInquiry/v2/test"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/TVDepositAccountTransactionInquiry/v2/test"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/TVDepositAccountTransactionInquiry/v2"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/TVDepositAccountTransactionInquiry/v2/test"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/TVDepositAccountTransactionInquiry/v2/prod"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "PaymentsStopcheckInitiate",
+          "path": "{current-account-id}/payments/stopcheck/initiate",
+          "method": "POST",
+          "lambda": {
+            "image": {
+              "id": "currentaccount-payments",
+              "tag": "1.1.2-6557c17ce",
+              "repositorySufix": "currentaccount-payments",
+              "cmd": [
+                "com.evertec.cbap.currentaccount.payments.LambdaHandler::handleRequest"
+              ]
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "MIBANCO_SOAP_URL": "http://64.178.214.155:9996/TVStopCheckAdd/test",
+                  "EBSS_SOAP_URL": "http://64.178.214.155:9996/IdaStopPmtMaint/V2"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "MIBANCO_SOAP_URL": "http://64.178.214.155:9996/TVStopCheckAdd/test",
+                  "EBSS_SOAP_URL": "http://64.178.214.155:9996/IdaStopPmtMaint/V2"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "MIBANCO_SOAP_URL": "http://64.178.214.157:9996/TVStopCheckAdd",
+                  "EBSS_SOAP_URL": "http://64.178.214.157:9996/IdaStopPmtMaint/V2"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "MIBANCO_SOAP_URL": "http://64.178.214.155:9996/TVStopCheckAdd/test",
+                  "EBSS_SOAP_URL": "http://64.178.214.155:9996/IdaStopPmtMaint/V2"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "MIBANCO_SOAP_URL": "https://api.dpint.evertecinc.com:9996/TVStopCheckAdd/prod",
+                  "EBSS_SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaStopPmtMaint/V2"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "LastStatements",
+          "path": "{current-account-id}/statements/{last-statement-date}/retrieve",
+          "method": "GET",
+          "lambda": {
+            "image": {
+              "id": "currentaccount-statements",
+              "tag": "1.1.0-653f1461",
+              "repositorySufix": "currentaccount-statements",
+              "cmd": [
+                "com.evertec.cbap.statements.LastStatementDateLambdaHandler::handleRequest"
+              ]
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/TVDepositStatementInquiry/test"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/TVDepositStatementInquiry/test"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/TVDepositStatementInquiry"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/TVDepositStatementInquiry/test"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/TVDepositStatementInquiry/prod"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "ControlReasonOccurranceControl",
+          "path": "{current-account-id}/controlreason/{control-reason-id}/occurrance/{occurrance}/control",
+          "method": "DELETE",
+          "lambda": {
+            "image": {
+              "id": "currentaccount-controlreason-occurrance-control",
+              "tag": "1.1.0-6566f472"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaCtrlRsnMaint"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaCtrlRsnMaint"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/IdaCtrlRsnMaint"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaCtrlRsnMaint"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaCtrlRsnMaint"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "Interest",
+          "path": "{current-account-id}/interest/evaluate",
+          "method": "POST",
+          "lambda": {
+            "image": {
+              "id": "currentaccount-interest",
+              "tag": "1.1.0-655ef345"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/SosGetInterestV2"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/SosGetInterestV2"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/SosGetInterestV2"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/SosGetInterestV2"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/SosGetInterestV2"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "Adjustments",
+          "path": "{current-account-id}/adjustments/initiate",
+          "method": "POST",
+          "lambda": {
+            "image": {
+              "id": "currentaccount-adjustments",
+              "tag": "1.1.0-6564d082"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/SosPutAdjustment"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/SosPutAdjustment"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/SosPutAdjustment"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/SosPutAdjustment"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/SosPutAdjustment"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "TransactionTypeNoPostUpdate",
+          "path": "{current-account-id}/transactiontype/nopost/update",
+          "method": "PUT",
+          "lambda": {
+            "image": {
+              "id": "currentaccount-transactiontype-nopost-update",
+              "tag": "1.1.0-65650632"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaNoPostTxn"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaNoPostTxn"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/IdaNoPostTxn"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaNoPostTxn"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaNoPostTxn"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "ExtendStatementsControl",
+          "path": "{current-account-id}/statements/preferences/control",
+          "method": "DELETE",
+          "lambda": {
+            "image": {
+              "id": "current-account-extend-statements-control",
+              "tag": "1.1.0-65675ad8"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaStmtDispRemove"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaStmtDispRemove"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/IdaStmtDispRemove"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaStmtDispRemove"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaStmtDispRemove"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "AssociatedPartyUpdate",
+          "path": "{current-account-id}/associatedparty/update",
+          "method": "PUT",
+          "lambda": {
+            "image": {
+              "id": "current-account-associated-party-update",
+              "tag": "1.1.0-658db9a4"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaTutorMaint"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaTutorMaint"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/IdaTutorMaint"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaTutorMaint"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaTutorMaint"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "ExtendStatementsInitiate",
+          "path": "{current-account-id}/statements/preferences/initiate",
+          "method": "POST",
+          "lambda": {
+            "image": {
+              "id": "current-account-extend-statements-initiate",
+              "tag": "1.1.0-6567abf9159b"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaStmtDispAdd"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaStmtDispAdd"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/IdaStmtDispAdd"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaStmtDispAdd"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaStmtDispAdd"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "TransactionTypeNoPostControl",
+          "path": "{current-account-id}/transactiontype/nopost/control",
+          "method": "DELETE",
+          "lambda": {
+            "image": {
+              "id": "currentaccount-transactiontype-nopost-control",
+              "tag": "1.1.0-655b349a"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaNoPostTxn"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaNoPostTxn"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/IdaNoPostTxn"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaNoPostTxn"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaNoPostTxn"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "Esign",
+          "path": "{current-account-id}/esign/initiate",
+          "method": "POST",
+          "lambda": {
+            "image": {
+              "id": "currentaccount-esign",
+              "tag": "1.1.0-6564c578"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL":  "http://64.178.214.155:1789/ESign"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL":  "http://64.178.214.155:1789/ESign"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL":  "http://64.178.214.157:1789/ESign"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL":  "http://64.178.214.155:1789/ESign"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL":  "https://api.dpint.evertecinc.com:9996/ESign"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "CurrentAccountControlReason",
+          "path": "{current-account-id}/controlreason/initiate",
+          "method": "POST",
+          "lambda": {
+            "image": {
+              "id": "currentaccount-controlreason",
+              "tag": "1.1.0-6564d593"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaCtrlRsnMaint"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaCtrlRsnMaint"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/IdaCtrlRsnMaint"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaCtrlRsnMaint"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaCtrlRsnMaint"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "Initiate",
+          "path": "initiate",
+          "method": "POST",
+          "lambda": {
+            "image": {
+              "id": "currentaccount-initiate",
+              "tag": "1.1.0-65814e7c"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaAccountOpen"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaAccountOpen"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/IdaAccountOpen"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaAccountOpen"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaAccountOpen"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "CurrentAccountExtendIdentifierInitiate",
+          "path": "identifier/initiate",
+          "method": "POST",
+          "lambda": {
+            "image": {
+              "id": "current-account-extend-identifier-initiate",
+              "tag": "1.1.0-657b4d4f"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaAcctGen"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaAcctGen"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/IdaAcctGen"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaAcctGen"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaAcctGen"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "CurrentAccountUpdate",
+          "path": "{current-account-id}/update",
+          "method": "PUT",
+          "lambda": {
+            "image": {
+              "id": "current-account-update",
+              "tag": "1.1.0-656f5ae1"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaStatusChange"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaStatusChange"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/IdaStatusChange"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaStatusChange"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaStatusChange"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "Comboacct",
+          "path": "{current-account-id}/comboacct/retrieve",
+          "method": "GET",
+          "lambda": {
+            "image": {
+              "id": "currentaccount-retrieve",
+              "tag": "1.1.1-65963dd2"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "IDA_SOAP_URL": "http://64.178.214.155:9996/IdaAccountInquiry",
+                  "USAV_SOAP_URL": "http://64.178.214.155:9996/USaveAcctInq"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "IDA_SOAP_URL": "http://64.178.214.155:1789/IdaAccountInquiry",
+                  "USAV_SOAP_URL": "http://64.178.214.155:1789/USaveAcctInq"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "IDA_SOAP_URL": "http://64.178.214.157:1789/IdaAccountInquiry",
+                  "USAV_SOAP_URL": "http://64.178.214.157:1789/USaveAcctInq"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "IDA_SOAP_URL": "http://64.178.214.155:1789/IdaAccountInquiry",
+                  "USAV_SOAP_URL": "http://64.178.214.155:1789/USaveAcctInq"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "IDA_SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaAccountInquiry",
+                  "USAV_SOAP_URL": "https://api.dpint.evertecinc.com:9996/USaveAcctInq"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "CurrentAccountResponsibleBranchUpdate",
+          "path": "{current-account-id}/responsiblebranch/{branch-id}/update",
+          "method": "PUT",
+          "lambda": {
+            "image": {
+              "id": "current-account-extend-responsiblebranch-updates",
+              "tag": "1.1.0-6567b314"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaAcctRespUnit"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaAcctRespUnit"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/IdaAcctRespUnit"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaAcctRespUnit"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaAcctRespUnit"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "HoldsRetrieve",
+          "path": "{current-account-id}/holds/retrieve",
+          "method": "GET",
+          "lambda": {
+            "image": {
+              "id": "currentaccount-holds-retrieve",
+              "tag": "1.1.0-657b1512"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:9996/IdaHoldsInquiryAdmin"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaHoldsInquiryAdmin"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/IdaHoldsInquiryAdmin"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaHoldsInquiryAdmin"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaHoldsInquiryAdmin"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "AssistanceCodeUpdate",
+          "path": "{current-account-id}/assistancecode/{assistance-code-id}/update",
+          "method": "PUT",
+          "lambda": {
+            "image": {
+              "id": "currentaccount-assistancecode-update",
+              "tag": "1.1.0-6579883a"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaAssistCodeUpdate"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaAssistCodeUpdate"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/IdaAssistCodeUpdate"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaAssistCodeUpdate"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaAssistCodeUpdate"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "CurrentAccountDepositsAndWithdrawalsInitiate",
+          "path": "{current-account-id}/depositsandwithdrawals/holds/initiate",
+          "method": "POST",
+          "lambda": {
+            "image": {
+              "id": "current-account-deposits-and-withdrawals-initiate",
+              "tag": "1.1.0-656747c9"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaHoldsPlaceRegular"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaHoldsPlaceRegular"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/IdaHoldsPlaceRegular"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaHoldsPlaceRegular"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaHoldsPlaceRegular"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "DepositsAndWithdrawalsControl",
+          "path": "{current-account-id}/depositsandwithdrawals/{account-hold-id}/holds/control",
+          "method": "DELETE",
+          "lambda": {
+            "image": {
+              "id": "current-account-deposits-and-withdrawals-control",
+              "tag": "1.1.0-6567361e"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaHoldsRemoveRegularAuth"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaHoldsRemoveRegularAuth"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/IdaHoldsRemoveRegularAuth"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaHoldsRemoveRegularAuth"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaHoldsRemoveRegularAuth"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "DepositsAndWithdrawalsRetrieve",
+          "path": "{current-account-id}/depositsandwithdrawals/holds/retrieve",
+          "method": "GET",
+          "lambda": {
+            "image": {
+              "id": "currentaccount-depositsandwithdrawals-holds-retrieve",
+              "tag": "1.1.0-6568b416"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:9996/IdaHoldsInquiry"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaHoldsInquiry"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/IdaHoldsInquiry"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaHoldsInquiry"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaHoldsInquiry"
+                }
+              }
+            ]
+          }
+        },
+		{
+          "id": "CurrentAccountHoldsControl",
+          "path": "{current-account-id}/holds/control",
+          "method": "DELETE",
+          "lambda": {
+            "image": {
+              "id": "current-account-holds-control",
+              "tag": "1.1.0-6576db50"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaHoldsPlaceRemoveAdmin"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaHoldsPlaceRemoveAdmin"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/IdaHoldsPlaceRemoveAdmin"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaHoldsPlaceRemoveAdmin"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaHoldsPlaceRemoveAdmin"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "CurrentAccountHoldsInitiate",
+          "path": "{current-account-id}/holds/initiate",
+          "method": "POST",
+          "lambda": {
+            "image": {
+              "id": "current-account-holds-initiate",
+              "tag": "1.1.0-6566cd97"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaHoldsPlaceRemoveAdmin"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaHoldsPlaceRemoveAdmin"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/IdaHoldsPlaceRemoveAdmin"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaHoldsPlaceRemoveAdmin"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaHoldsPlaceRemoveAdmin"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "PromoCodeUpdate",
+          "path": "{current-account-id}/promocode/{promo-code-id}/update",
+          "method": "PUT",
+          "lambda": {
+            "image": {
+              "id": "currentaccount-promocode-update",
+              "tag": "1.1.0-6579895f"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaPromoCodeMaint"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaPromoCodeMaint"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/IdaPromoCodeMaint"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaPromoCodeMaint"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaPromoCodeMaint"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "ResponsibleUnitUpdate",
+          "path": "{current-account-id}/responsibleunit/{responsible-unit-id}/update",
+          "method": "PUT",
+          "lambda": {
+            "image": {
+              "id": "current-account-responsible-unit-update",
+              "tag": "1.1.0-655aefac"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaRespUnitMaint"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaRespUnitMaint"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/IdaRespUnitMaint"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaRespUnitMaint"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaRespUnitMaint"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "CurrentAccountRelationshipUpdate",
+          "path": "{current-account-id}/accountrelationship/{employee-id}/update",
+          "method": "PUT",
+          "lambda": {
+            "image": {
+              "id": "current-account-relationship-update",
+              "tag": "1.1.0-6566ebb6"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaStaff"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaStaff"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/IdaStaff"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaStaff"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaStaff"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "CurrentAccountPaymentsXfersRecurringRetrieve",
+          "path": "{current-account-id}/payments/xfers/recurring/retrieve",
+          "method": "GET",
+          "lambda": {
+            "image": {
+              "id": "current-account-payments-xfers-recurring-retrieve",
+              "tag": "1.1.0-657099b0"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaPeriodicXferList"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaPeriodicXferList"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/IdaPeriodicXferList"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/IdaPeriodicXferList"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaPeriodicXferList"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "StatementsPreferencesUpdate",
+          "path": "{current-account-id}/statements/preferences/update",
+          "method": "PUT",
+          "lambda": {
+            "image": {
+              "id": "current-account-statements-preferences-update",
+              "tag": "1.1.0-6564678a"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/StmtLangPrefMod"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/StmtLangPrefMod"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:1789/StmtLangPrefMod"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:1789/StmtLangPrefMod"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/StmtLangPrefMod"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "CurrentAccountPaymentsStopcheckUpdate",
+          "path": "{current-account-id}/payments/stopcheck/update",
+          "method": "PUT",
+          "lambda": {
+            "image": {
+              "id": "currentaccount-payments-stopcheck-update",
+              "tag": "1.1.0-65a0e948"
+            },
+            "environments": [
+              {
+                "type": "DEV",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:9996/IdaStopPmtMaint/V2"
+                }
+              },
+              {
+                "type": "QA",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:9996/IdaStopPmtMaint/V2"
+                }
+              },
+              {
+                "type": "CRT",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.157:9996/IdaStopPmtMaint/V2"
+                }
+              },
+              {
+                "type": "TST",
+                "variables": {
+                  "SOAP_URL": "http://64.178.214.155:9996/IdaStopPmtMaint/V2"
+                }
+              },
+              {
+                "type": "PRD",
+                "variables": {
+                  "SOAP_URL": "https://api.dpint.evertecinc.com:9996/IdaStopPmtMaint/V2"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "accounts": [
+        {
+          "type": "DEV",
+          "id": "737768706143"
+        },
+        {
+          "type": "QA",
+          "id": "737768706143"
+        },
+        {
+          "type": "CRT",
+          "id": "583955133442"
+        },
+        {
+          "type": "TST",
+          "id": "737768706143"
+        },
+        {
+          "type": "PRD",
+          "id": "606347618102"
+        }
+      ]
+    }
+  },
+  "plugin": [
+    "cdk-multi-profile-plugin"
+  ]
+}
