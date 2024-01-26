@@ -36,11 +36,11 @@ def main():
             tempnewmanurl = "newman/"+args[2]+"/"+lambdatid
             subprocess.run(["mkdir", tempnewmanurl])
 
-            #command = "newman run "+ pathCollection +" --environment "+pathEnvironment+" -r junit --reporter-junit-export " + tempnewmanurl
+            command = "newman run "+ pathCollection +" --environment "+pathEnvironment+" -r junit --reporter-junit-export " + tempnewmanurl
             #print("Ready to run command = "+ command)
-            result = subprocess.run(["newman", "run",pathCollection, "--environment", pathEnvironment , "-r", "junit", "--reporter-junit-export", tempnewmanurl ],
-                           shell=True, capture_output=True, text=True)
-            print(result)
+            #- newman run PetStoreAPI.postman_collection.json --environment PetStoreAPIEnvironment.postman_environment.json -r junit
+            result = subprocess.run(command.split(" "), shell=True, capture_output=True, text=True)
+            #print(result)
             #process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
             #process.wait()
         else:
