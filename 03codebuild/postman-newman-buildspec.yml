@@ -51,6 +51,8 @@ phases:
     commands:
       - echo Build started on `date` from dir `pwd`
       - cd ..
+      - ls -lrt 
+      - echo ${apitest}
       - pwd
       - rm -rf newman/${apitest}
       - sleep 1
