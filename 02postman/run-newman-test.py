@@ -33,14 +33,15 @@ def main():
         if isExist & isExistcollection & isExistEnvironment:
             #Crear directorio newman/servicio
             #tempnewmanurl = "newman/"+args[2]+"/"+lambdatid+"/"+lambdatag
-            tempnewmanurl = "newman/"+args[2]+"/"+lambdatid
-            subprocess.run(["mkdir", tempnewmanurl])
+            tempnewmanurl = "newman/"+args[2]+"/"+lambdatid+"/"
+            os.system("mkdir "+tempnewmanurl )
+            #subprocess.run(["mkdir", tempnewmanurl])
 
             command = "newman run "+ pathCollection +" --environment "+pathEnvironment+" -r junit --reporter-junit-export " + tempnewmanurl
             #print("Ready to run command = "+ command)
             #- newman run PetStoreAPI.postman_collection.json --environment PetStoreAPIEnvironment.postman_environment.json -r junit
             result = subprocess.run(command.split(" "), shell=True, capture_output=True, text=True)
-            #print(result)
+            print(result)
             #process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
             #process.wait()
         else:
