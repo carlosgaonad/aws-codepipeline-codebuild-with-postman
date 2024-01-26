@@ -6,7 +6,7 @@ def main():
     args = sys.argv[1:] #Stating by 0
     servicesapi = []
 
-    with open("../cdk.json","r") as file:
+    with open("cdk.json","r") as file:
         jsonData = json.load(file)
         #print(jsonData)
         #print(jsonData['context']['Service']['resources'])
