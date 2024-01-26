@@ -55,7 +55,7 @@ phases:
       - mkdir newman
       - mkdir newman/${apitest}
       - python run-newman-test.py ${REPO_COLECTIONS} ${TEST_TYPE} ${apitest} ${ENVIRONMENT}
-      - ls -lrt newman/
+      - ls -lrt newman/${apitest}
       - mkdir newman/02postman
       - mkdir newman/02_1postman
       - cd ./02postman
