@@ -36,7 +36,7 @@ phases:
       - aws s3 cp "s3://${S3_BUCKET}/postman-env-files/PetStoreAPI.postman_collection.json" ./02postman/
       - cd ./02postman
       - ./update-postman-env-file.sh $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY $AWS_SESSION_TOKEN
-      - cp run-newman-test.py ../
+      #- cp run-newman-test.py ../
       - cd ..
       - aws s3 cp "s3://${S3_BUCKET}/postman-env-files/PetStoreAPIEnvironment.postman_environment.json" ./02_1postman/
       - aws s3 cp "s3://${S3_BUCKET}/postman-env-files/PetStoreAPI.postman_collection.json" ./02_1postman/
@@ -60,8 +60,9 @@ phases:
       - mkdir newman/${apitest}
       - ls -lrt
       - python run-newman-test.py ${REPO_COLECTIONS} ${TEST_TYPE} ${apitest} ${ENVIRONMENT}
-      - ls -lrt newman/${apitest}/*
-      - ls -lrt ${apitest}/*
+      - ./run-newman-test.sh 
+      #- ls -lrt newman/${apitest}/*
+      #- ls -lrt ${apitest}/*
       #- mkdir newman/02postman
       #- mkdir newman/02_1postman
       #- cd ./02postman
