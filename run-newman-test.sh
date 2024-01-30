@@ -11,7 +11,7 @@ for d in ./*/ ; do
         echo "File $entry on $d"
         REPORT_NAME=$(echo $d| cut -d'/' -f 2)
         echo " ******** $REPORT_NAME  ****"
-        ls -lrt $d
+        ls -lrt $entry
         # ./02postman//newman-run-report-2024-01-02-21-57-59-022-0.xml
         # revert newman-run-report-2024-01-02-21-57-59-022-0.xml//02postman/.
         #FILE_REPORT=$(echo $entry| rev |cut -d'/' -f 1 | rev)
