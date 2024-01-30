@@ -36,6 +36,7 @@ def main():
             tempnewmanurl = "newman/"+args[2]+"/"+lambdatid+"/"
             os.system("mkdir "+tempnewmanurl )
             #subprocess.run(["mkdir", tempnewmanurl])
+            os.system("echo '******************************************** PATH '")
             os.system("ls -lrt "+pathCollection)
 
             command = "newman run "+ pathCollection +" --environment "+pathEnvironment+" -r junit --reporter-junit-export " + tempnewmanurl
