@@ -36,6 +36,7 @@ def main():
             tempnewmanurl = "newman/"+args[2]+"/"+lambdatid+"/"
             os.system("mkdir "+tempnewmanurl )
             #subprocess.run(["mkdir", tempnewmanurl])
+            os.system("ls -lrt "+pathCollection)
 
             command = "newman run "+ pathCollection +" --environment "+pathEnvironment+" -r junit --reporter-junit-export " + tempnewmanurl
             #print("Ready to run command = "+ command)
@@ -45,7 +46,7 @@ def main():
             #process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
             #process.wait()
         else:
-            print("Directory or files not fount in "+pathDir+ ", please check your repository")
+            print("Directory or files not found in "+pathDir+ ", please check your repository")
 
 
 if __name__ == "__main__":
