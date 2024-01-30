@@ -45,7 +45,7 @@ def main():
             #os.system("echo '******************************************** PATH '")
             #os.system("ls -lrt "+pathCollection)
 
-            command = "newman run "+ pathCollection +" --environment "+pathEnvironment+" -r junit --reporter-junit-export " + tempnewmanurl
+            command = "newman run ./"+ pathCollection +" --environment ./"+pathEnvironment+" -r junit --reporter-junit-export " + tempnewmanurl
             #print("Ready to run command = "+ command)
             #- newman run PetStoreAPI.postman_collection.json --environment PetStoreAPIEnvironment.postman_environment.json -r junit
             result = subprocess.run(command.split(" "), shell=True, capture_output=True, text=True)
