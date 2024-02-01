@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 echo "Running run-newman-test.sh"
-cd  newman/
+### CD AFOLDER DEL REPO
+cd  $1 
 for d in ./*/ ; do
     # Loop through each subdirectory 
     # and count the number of words in each file
