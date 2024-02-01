@@ -39,6 +39,7 @@ def main():
             #tempnewmanurl = "newman/"+args[2]+"/"+lambdatid+"/"+lambdatag
             tempnewmanurl = "newman/"+args[2]+"/"+lambdatid+"/"
             os.system("mkdir "+tempnewmanurl )
+            os.system("mkdir "+destinationpath )
             os.system("cp "+pathCollection+" "+destinationpath )
             os.system("cp "+pathEnvironment+" "+destinationpath )
             #subprocess.run(["mkdir", tempnewmanurl])
