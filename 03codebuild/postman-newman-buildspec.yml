@@ -60,7 +60,8 @@ phases:
       - python run-newman-test.py ${REPO_COLECTIONS} ${TEST_TYPE} ${apitest} ${ENVIRONMENT}
       - ls -lrt ${apitest}
       - chmod 764 run-newman-test.sh 
-      - ./run-newman-test.sh ${apitest}
+      - chmod 764 update-postman-environment.sh 
+      - ./run-newman-test.sh ${apitest} $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY $AWS_SESSION_TOKEN
       #- ls -lrt newman/${apitest}/*
       #- ls -lrt ${apitest}/*
       #- mkdir newman/02postman
