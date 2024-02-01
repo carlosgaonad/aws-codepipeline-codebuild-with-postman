@@ -60,8 +60,8 @@ phases:
       - mkdir newman/${apitest}
       - ls -lrt
       - python run-newman-test.py ${REPO_COLECTIONS} ${TEST_TYPE} ${apitest} ${ENVIRONMENT}
-      - chmod 764 run-newman-test.sh ${apitest}
-      - ./run-newman-test.sh 
+      - chmod 764 run-newman-test.sh 
+      - ./run-newman-test.sh ${apitest}
       #- ls -lrt newman/${apitest}/*
       #- ls -lrt ${apitest}/*
       #- mkdir newman/02postman
