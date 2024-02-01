@@ -23,3 +23,5 @@ jq -e --arg AWS_SESSION_TOKEN "$3" '(.values[] | select(.key=="AWS_SESSION_TOKEN
 echo "Updated postman_environment.json"
 
 head -50 postman_environment.json
+pwd 
+ls -lrt

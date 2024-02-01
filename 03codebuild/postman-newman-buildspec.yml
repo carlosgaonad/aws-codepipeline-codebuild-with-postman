@@ -32,25 +32,25 @@ phases:
       - AWS_SESSION_TOKEN=$(curl -s $CREDENTIALS_URL | jq -r '.Token')
       - echo Llave de Acceso $AWS_ACCESS_KEY_ID  Secret $AWS_SECRET_ACCESS_KEY
       - echo prebuild started on `date` from dir `pwd`
-      - aws s3 cp "s3://${S3_BUCKET}/postman-env-files/PetStoreAPIEnvironment.postman_environment.json" ./02postman/
-      - aws s3 cp "s3://${S3_BUCKET}/postman-env-files/PetStoreAPI.postman_collection.json" ./02postman/
-      - cd ./02postman
-      - chmod 764 update-postman-env-file.sh
-      - ./update-postman-env-file.sh $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY $AWS_SESSION_TOKEN
-      - cd ..
-      - aws s3 cp "s3://${S3_BUCKET}/postman-env-files/PetStoreAPIEnvironment.postman_environment.json" ./02_1postman/
-      - aws s3 cp "s3://${S3_BUCKET}/postman-env-files/PetStoreAPI.postman_collection.json" ./02_1postman/
-      - cp ./02postman/update-postman-env-file.sh ./02_1postman/
-      - cd ./02_1postman/
-      - ls -lrt
-      - ./update-postman-env-file.sh $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY $AWS_SESSION_TOKEN
+      #- aws s3 cp "s3://${S3_BUCKET}/postman-env-files/PetStoreAPIEnvironment.postman_environment.json" ./02postman/
+      #- aws s3 cp "s3://${S3_BUCKET}/postman-env-files/PetStoreAPI.postman_collection.json" ./02postman/
+      #- cd ./02postman
+      #- chmod 764 update-postman-env-file.sh
+      #- ./update-postman-env-file.sh $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY $AWS_SESSION_TOKEN
+      #- cd ..
+      #- aws s3 cp "s3://${S3_BUCKET}/postman-env-files/PetStoreAPIEnvironment.postman_environment.json" ./02_1postman/
+      #- aws s3 cp "s3://${S3_BUCKET}/postman-env-files/PetStoreAPI.postman_collection.json" ./02_1postman/
+      #- cp ./02postman/update-postman-env-file.sh ./02_1postman/
+      #- cd ./02_1postman/
+      #- ls -lrt
+      #- ./update-postman-env-file.sh $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY $AWS_SESSION_TOKEN
       
 
 
   build:
     commands:
       - echo Build started on `date` from dir `pwd`
-      - cd .. 
+      #- cd .. 
       - pwd
       - rm -rf newman/${apitest}
       - sleep 1
