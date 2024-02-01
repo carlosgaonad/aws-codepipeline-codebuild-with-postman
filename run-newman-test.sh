@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-echo "Running run-newman-test.sh"
-### CD AFOLDER DEL REPO
+echo "Running run-newman-test.sh $1"
 cd  $1 
 for d in ./*/ ; do
     # Loop through each subdirectory 
