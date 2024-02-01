@@ -4,7 +4,7 @@ echo "Running run-newman-test.sh $1"
 cd "$1" 
 pwd
 ls -lrt *
-for d in ./*/ ; do
+for d in * do
     # Loop through each subdirectory 
     # and count the number of words in each file
     echo "List Directory $d"
