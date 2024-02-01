@@ -50,16 +50,15 @@ phases:
   build:
     commands:
       - echo Build started on `date` from dir `pwd`
-      - cd ..
-      - ls -lrt 
+      - cd .. 
       - pwd
       - rm -rf newman/${apitest}
       - sleep 1
-      - ls -lrt
       - mkdir newman
       - mkdir newman/${apitest}
       - ls -lrt
       - python run-newman-test.py ${REPO_COLECTIONS} ${TEST_TYPE} ${apitest} ${ENVIRONMENT}
+      - ls -lrt
       - chmod 764 run-newman-test.sh 
       - ./run-newman-test.sh ${apitest}
       #- ls -lrt newman/${apitest}/*
